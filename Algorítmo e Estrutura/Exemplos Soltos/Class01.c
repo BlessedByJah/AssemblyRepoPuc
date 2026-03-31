@@ -1,0 +1,40 @@
+# include <stdio.h>
+# include <stdlib.h>
+
+void print ( int *s, int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        printf("%i", s[i]);
+    }
+
+    printf("\n");
+}
+
+void sum (int *vetor, int *Array, int TamVetor, int PosPreenchidas, int Soma, int NumPercorridos , int Objetivo)
+{
+    if (Soma == Objetivo)
+    {
+        print(Array , Objetivo);
+        return;
+    }
+    if(Soma > Objetivo )
+    {
+        return;
+    }
+
+    for( int i = NumPercorridos; i < TamVetor; i++)
+    {
+        Array[PosPreenchidas] = vetor[i];
+        sum(vetor, Array, TamVetor, PosPreenchidas + 1, Soma + vetor[i], i + 1, Objetivo);
+    }
+}
+
+int main ()
+{
+    int vetor[] = {10, 7, 5 ,18 ,12 ,20,15 };
+    int *Array = malloc(7 * sizeof(int));
+    sum(vetor, Array, 7, 0, 0, 0, 35);
+    free;
+    return EXIT_SUCCESS;
+}
