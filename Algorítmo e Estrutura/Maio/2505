@@ -1,0 +1,107 @@
+# include <stdio.h>
+# include <stdlib.h>
+
+# define PAI(i)         (((i) - 1) / 2)
+# define FILHO_ESQUERDO(i) (2 * (i) + 1)
+# define FILHO_DIREITO(i)  (2 * (i) + 2)
+
+void trocar(int *a, int *b)
+{
+    int temporario = *a;
+    *a = *b;
+    *b = temporario;
+}
+
+void subir (int *v, int tamanho )
+{
+
+}
+
+void descer(int *v, int tamanho, int i )
+{
+    int maior = i;
+    int esquerdo = FILHO_ESQUERDO(i);
+    int direito = FILHO_DIREITO(i);
+
+    if( esquerdo < tamanho && v[esquerdo] > v[maior])
+    {
+        maior= esquerdo;
+    }
+    if(direito < tamanho && v[direito] > v[maior])
+    {
+        maior = direito;
+    }
+    if(i != maior)
+    {
+
+    }
+}
+
+void inserir(int *v, int tamanho, int k)
+{
+
+}
+
+int  extrair(int *v, int *tamanho)
+{
+    if(tamanho == 0)
+    {
+        printf("ERRO: HEAP esta vazio \n");
+        return -1;
+    }
+
+    int temporario = v[0];
+    v[0] = v[ *tamanho - 1];
+    *tamanho = *tamanho - 1;
+    descer(v, tamanho, 0);
+
+    if(tamanho > 0)
+    {
+        int *w = realloc(*v, (*tamanho) * sizeof(int));
+
+        if(w == NULL)
+        {
+            printf("ERO: alha ao re-alocar a memoria");
+            return -1;
+        }
+        
+        v = w;
+        free(w);
+    }
+}
+
+void construir(int *v, int tamanho)
+{
+    for (int i = tamanho / 2; i >= 0 ; i--)
+    {
+        descer(v, tamanho, i);
+    }
+    
+}
+void imprimir(int *v, int tamanho)
+{
+    for(int i = 0; i < tamanho ; i++)
+    {
+        printf("%i ", v[i]);
+    }
+    printf("\n");
+}
+/*
+ Bubble Sort     O(n^2)
+ Selection Sort  O(n^2)
+ Heap Sort       O(n log n )
+ */
+
+void ordernar(int *v, int tamanho)
+{
+
+}
+
+int main() 
+{
+    int v[] = {3,9,2,1,7,8,5,4,6,10};
+    int tamanho = sizeof(v) / sizeof(v[0]);
+    construir(v,tamanho);
+    imprimir(v,tamanho);
+    return  EXIT_SUCCESS;
+}
